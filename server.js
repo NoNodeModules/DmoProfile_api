@@ -1,22 +1,45 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-
 const {dbConnect} = require('./config/configRagister');
-const router = require('./Router/user');
-const middleware = require('express-middleware');
+const path = require('path')
 const app = express();
 
 dbConnect();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(router)
-// app.use(check,validationResult);
+
+const auth = require("./Router/auth")
+app.use(auth);
+
+const router  = require('./Router/user');
+app.use(router);
+
+const profile = require("./Router/profile")
+app.use(profile);
 
 app.listen(5000,()=>{ 
     console.log("listening on this 3000 port")
 })
 
-app.use('/api', user)
-app.use('/api',auth)
 
-// app.use('user',require('./Router/user'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

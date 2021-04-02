@@ -1,23 +1,31 @@
 const mongoose = require('mongoose');
 
-const url =  { "mogoUrI" : "mongodb://localhost:27017/express-mongo-app",
-    "jwtSecret" : "mysecrettoken"
-}
+const url = { "mogoUrI" : "mongodb://localhost:27017/FirstProject"}
+const jwtSecret = "mysecrettoken"
 
-console.log(url)
 const dbConnect = async ()=>{
     mongoose.connect(url.mogoUrI,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex : true
-
+        useCreateIndex : true,
+        useFindAndModify : false
+        
     }).then(()=>{
         console.log("connection is sucessfully with mongo-db")
-    }).catch(()=>{
-        console.log("error")
+    }).catch((error)=>{
+        console.log(error)
     })
 }
-module.exports = {dbConnect};
+module.exports = {dbConnect, jwtSecret};
+
+
+
+
+
+
+
+
+
 
 
 
